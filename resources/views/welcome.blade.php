@@ -23,36 +23,14 @@
 
 @yield('content')
 
-{{--
-<!-- Header -->
-<section class="intro-header">
-    @yield('main-page.bigPicture')
-</section>
-
-<!-- Page Content -->
-<section class="content-section-a">
-    @yield('main-page.firstSection')
-</section>
-
-
-<section class="content-section-b">
-    @yield('main-page.secondSection')
-</section>
-
-
-<section class="content-section-a">
-    @yield('main-page.thirdSection')
-</section>
---}}
-
-
 <!-- Footer -->
 <footer>
     @include('includes.footer')
 </footer>
 
 <!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <!-- Bootstrap Core JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

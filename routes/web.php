@@ -10,17 +10,24 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('', function () {
+    return redirect('/welcome');
+});
 Route::get('/', function () {
-    redirect('/welcome');
+    return redirect('/welcome');
 });
 
 Route::get('/welcome', function () {
-    return view('content');
+    return view('landing-page.content');
 });
 
-Route::group(['prefix' => ''], function (){
+Route::group(['prefix' => 'company'], function (){
 
-    Route::get('/login', 'Auth/LoginController@showLoginForm');
+    Route::get('/login', 'Auth\LoginController@showLoginForm');
+    Route::post('/login', 'Auth\LoginController@login');
+    Route::post('/logout', 'Auth\LoginController@logout');
+
+
 });
 
 Route::group(['prefix' => 'admin'], function () {

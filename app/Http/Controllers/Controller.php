@@ -32,6 +32,6 @@ class Controller extends BaseController
             }
         }
 
-        return view('company.home');
+        return view('user.home', ['documents_approved' => $documents_approved, 'documents_declined' => $documents_declined, 'documents_review' => $documents_review, 'demands' => $demands]);
     }
 }

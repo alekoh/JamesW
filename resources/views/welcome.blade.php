@@ -8,11 +8,15 @@
     <title>James</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
-
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway:100,600">
+  {{--  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
     <!-- Custom Styles -->
-    <link href="{{asset('assets/welcome.css')}}" rel="stylesheet">
+    <link  rel="stylesheet" type="text/css" href="{{asset('assets/welcome.css')}}">
+    {{--bootstrap--}}
+    <link  type="text/css" href="{{asset('assets/bootstrap/bootstrap.css')}}" rel="stylesheet">
+    <link  type="text/css" href="{{asset('assets/bootstrap/bootstrap-grid.css')}}" rel="stylesheet">
+    <link  type="text/css" href="{{asset('assets/bootstrap/bootstrap-reboot.css')}}" rel="stylesheet">
+
 </head>
 <body>
 
@@ -21,29 +25,9 @@
     @include('includes.navigation')
 </header>
 
-@yield('content')
-
-{{--
-<!-- Header -->
-<section class="intro-header">
-    @yield('main-page.bigPicture')
-</section>
-
-<!-- Page Content -->
-<section class="content-section-a">
-    @yield('main-page.firstSection')
-</section>
-
-
-<section class="content-section-b">
-    @yield('main-page.secondSection')
-</section>
-
-
-<section class="content-section-a">
-    @yield('main-page.thirdSection')
-</section>
---}}
+<div id="content">
+    @yield('content')
+</div>
 
 
 <!-- Footer -->
@@ -52,8 +36,9 @@
 </footer>
 
 <!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+<script src="{{asset('bower_components/bower_components/jquery/dist/jquery.min.js')}}"></script>
+
 <!-- Bootstrap Core JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-@extends('welcome')
+@extends('landing-page.welcome')
 
 @section('content')
 
@@ -7,32 +7,26 @@
     <section class="intro-header">
         <div class="intro-message">
             <h1>Landing Page</h1>
-            <h3>A Template by Start Bootstrap</h3>
+            <h3>Login / Register</h3>
             <hr class="intro-divider">
             <ul class="list-inline intro-social-buttons">
                 <li class="list-inline-item">
-                    <a href="#" class="btn btn-secondary btn-lg">
+                    <a href="{{url('/admin/login')}}" class="btn btn-secondary btn-lg">
                         <i class="fa fa-twitter fa-fw"></i>
-                        <span class="network-name">Twitter</span>
+                        <span class="network-name">Admin</span>
                     </a>
                 </li>
                 <li class="list-inline-item">
-                    <a href="#" class="btn btn-secondary btn-lg">
+                    <a href="{{url('/company/login')}}" class="btn btn-secondary btn-lg">
                         <i class="fa fa-github fa-fw"></i>
-                        <span class="network-name">Github</span>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="#" class="btn btn-secondary btn-lg">
-                        <i class="fa fa-linkedin fa-fw"></i>
-                        <span class="network-name">Linkedin</span>
+                        <span class="network-name">Company</span>
                     </a>
                 </li>
             </ul>
         </div>
     </section>
 
-    <section class="content-section-a">
+    <section class="content-section-a" id="about">
         <div class="row">
             <div class="col-lg-5 ml-auto">
                 <hr class="section-heading-spacer">
@@ -48,7 +42,7 @@
         </div>
     </section>
 
-    <section class="content-section-b">
+    <section class="content-section-b" id="services">
         <div class="row">
             <div class="col-lg-5 mr-auto order-lg-2">
                 <hr class="section-heading-spacer">
@@ -63,7 +57,7 @@
         </div>
     </section>
 
-    <section class="content-section-a">
+    <section class="content-section-a" id="contact">
         <div class="row">
             <div class="col-lg-5 ml-auto">
                 <hr class="section-heading-spacer">

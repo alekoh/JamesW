@@ -20,12 +20,12 @@ Route::get('/welcome', function () {
 
 Route::group(['prefix' => ''], function (){
 
-    Route::get('/login', 'Auth/LoginController@showLoginForm');
+    Route::get('/login', 'Auth\LoginController@showLoginForm');
 });
 
 Route::group(['prefix' => 'admin'], function () {
 
-    // Route::get('/dashboard', 'AdminController@index');
+     Route::get('/dashboard', 'AdminController@listDocuments');
     Route::get('/login', 'AdminAuth\LoginController@showLoginForm');
     Route::post('/login', 'AdminAuth\LoginController@login');
     Route::post('/logout', 'AdminAuth\LoginController@logout');

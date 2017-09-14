@@ -54,6 +54,7 @@
                 </div>
             @endforeach
         </div>
+
         <div class="col-md-4">
             @foreach($companies as $company)
                 <div class="panel-group">
@@ -87,6 +88,38 @@
                 </div>
             @endforeach
         </div>
+        <div class="row">
+            <div class="col-md-4">
+                @foreach($demands as $demand)
+                    <div class="panel-group">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Requests</div>
+                            <div class="panel-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Company</th>
+                                        <th>Type of request</th>
+                                        <th>Created at</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            {{\App\Http\Controllers\AdminController::getName($demand->company_id)}}
+                                        </td>
+                                        <td>{{$demand->value}}</td>
+                                        <td>{{$demand->created_at}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
     </div>
 </div>
 @endsection

@@ -8,6 +8,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
+    {{--<link rel="stylesheet" href="{{asset('assets/bootstrap/bootstrap.min.css')}}">--}}
     <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/bootstrap/css/bootstrap-theme.min.css')}}">
     <!-- Font Awesome -->

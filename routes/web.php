@@ -28,11 +28,13 @@ Route::group(['prefix' => 'company'], function (){
     Route::post('/logout', 'Auth\LoginController@logout');
 
 
+
+    Route::get('/login', 'Auth\LoginController@showLoginForm');
 });
 
 Route::group(['prefix' => 'admin'], function () {
 
-    // Route::get('/dashboard', 'AdminController@index');
+     Route::get('/dashboard', 'AdminController@index');
     Route::get('/login', 'AdminAuth\LoginController@showLoginForm');
     Route::post('/login', 'AdminAuth\LoginController@login');
     Route::post('/logout', 'AdminAuth\LoginController@logout');
@@ -44,4 +46,14 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset');
     Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm');
     Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
+
+    Route::get('/createRequest','AdminController@create');
+
+    Route::post('/createRequest','AdminController@store');
+
+ /*   Route::get('/editRequest/{id}','AdminController@edit');
+
+    Route::post('/editRequest/{id}','AdminController@update');
+
+    Route::get('/deleteRequest/{id}','AdminController@destroy');*/
 });

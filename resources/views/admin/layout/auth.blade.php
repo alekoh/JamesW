@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html>
@@ -9,7 +10,8 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <!-- Bootstrap 3.3.6 -->
-    {{--<link rel="stylesheet" type="text/css" href="{{asset('bower_components/AdminLTE/bootstrap/css/bootstrap.min.css')}}">--}}
+    <link rel="stylesheet" type="text/css" href="{{asset('bower_components/AdminLTE/bootstrap/css/bootstrap.min.css')}}">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{asset('bower_components/AdminLTE/bootstrap/css/bootstrap-theme.min.css')}}">
 
@@ -20,7 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/dist/css/AdminLTE.min.css')}}">
+    <link rel="stylesheet" href="{{asset('bower_components/bower_components/AdminLTE/dist/css/AdminLTE.min.css')}}">
 
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you

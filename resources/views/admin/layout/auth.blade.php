@@ -7,15 +7,21 @@
     <title>AdminLTE 2 | Starter</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
     <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/bootstrap/css/bootstrap-theme.min.css')}}">
+    {{--<link rel="stylesheet" type="text/css" href="{{asset('bower_components/AdminLTE/bootstrap/css/bootstrap.min.css')}}">--}}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('bower_components/AdminLTE/bootstrap/css/bootstrap-theme.min.css')}}">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/dist/css/AdminLTE.min.css')}}">
+
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
@@ -390,15 +396,11 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 2.2.3 -->
-<script src="{{asset('bower_components/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{asset('bower_components//jquery/dist/jquery.min.js')}}"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="{{asset('bower_components/AdminLTE/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('bower_components/AdminLTE/bootstrap/js/bootstrap.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('bower_components/AdminLTE/dist/js/app.min.js')}}"></script>
 
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. Slimscroll is required when using the
-     fixed layout. -->
 </body>
 </html>

@@ -21,12 +21,16 @@ Route::get('/welcome', function () {
     return view('landing-page.content');
 });
 
+
 Route::group(['prefix' => 'company'], function (){
 
     Route::get('/login', 'Auth\LoginController@showLoginForm');
     Route::post('/login', 'Auth\LoginController@login');
     Route::post('/logout', 'Auth\LoginController@logout');
+    Route::get('/home', 'Controller@index');
 
+    Route::get('/documents/create', 'Controller@createDocument');
+    Route::post('/documents/create', 'Controller@storeDocument');
 
 
     Route::get('/login', 'Auth\LoginController@showLoginForm');

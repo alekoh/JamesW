@@ -21,9 +21,6 @@ Route::get('/welcome', function () {
     return view('landing-page.content');
 });
 
-Route::get('/login', function (){
-    return redirect('/company/login');
-});
 
 Route::group(['prefix' => 'company'], function (){
 

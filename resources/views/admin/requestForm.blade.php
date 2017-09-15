@@ -1,61 +1,72 @@
 @extends('admin.layout.auth')
 
 @section('content')
-    <div class="container">
+    <section class="content">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Add request</div>
-                    <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/requestForm') }}">
-                            {{ csrf_field() }}
-
+            <div class="col-md-10 col-md-offset-1">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Create request</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <form role="form" method="POST" action="{{ url('/admin/createRequest') }}">
+                        {{ csrf_field() }}
+                            <!-- text input -->
                             <div class="form-group">
-                                <label for="admin_id" class="col-md-4 control-label">Name</label>
-
-                                <div class="col-md-6">
-                                    <input id="admin_id" type="text" class="form-control" name="admin_id" value="{{ old('admin_id') }}" autofocus>
-
-                                    {{--@if ($errors->has('admin_id'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('admin_id') }}</strong>
-                                    </span>
-                                    @endif--}}
-                                </div>
+                                <label for="admin_id" class="control-label">Admin</label>
+                                <input id="admin_id" type="text" class="form-control" name="admin_id" value="{{ old('admin_id') }}" autofocus>
                             </div>
-
-                            <div class="form-group">
-                                <label for="email" class="col-md-4 control-label">Choose company</label>
-                                <div class="col-md-6">
-                                    <div class="dropdown">
-                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials
-                                            <span class="caret"></span></button>
-                                        <ul class="dropdown-menu">
-                                            <li class="dropdown-header">Company</li>
-                                            <li><a href="">{{\App\Http\Controllers\AdminController::getName($demand->company_id)}}</a></li>
-                                        </ul>
+                            @foreach($companies as $company)
+                                <div class="form-group">
+                                    <label>Choose Company</label>
+                                    @foreach($companies as $company)
+                                        <input type="hidden" name="company_id" value="{{$company->id}}">
+                                        <select class="form-control" data-toggle="dropdown" type="button">
+                                            <option>{{$company->name}}</option>
+                                        </select>
+                                    @endforeach
                                     </div>
-                                </div>
-                            </div>
-
+                                @endforeach
+                            <!-- textarea -->
                             <div class="form-group">
-                                <div class="col-md-6">
-                                    <textarea cols="4" rows="4" about="value" type="text" name="">
-
-                                    </textarea>
-                                </div>
+                                <label>Description</label>
+                                <textarea class="form-control" id="exampleTextarea" rows="4" cols="7" name="value"></textarea>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Send
-                                    </button>
+                        {{-- <div class="form-group">
+                             <div class="box">
+                                 <div class="box-header">
+                                     <h3 class="box-title">Description of the request
+                                         <small>Simple and fast</small>
+                                     </h3>
+                                     <!-- tools box -->
+                                     <div class="pull-right box-tools">
+                                         <button type="button" class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                             <i class="fa fa-minus"></i></button>
+                                         <button type="button" class="btn btn-default btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove">
+                                             <i class="fa fa-times"></i></button>
+                                     </div>
+                                     <!-- /. tools -->
+                                 </div>
+                                 <!-- /.box-header -->
+                                 <div class="box-body pad">
+                                     <form>
+                                         <textarea class="textarea" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                     </form>
+                                 </div>
+                             </div>
+                         </div>--}}
+                        <!-- select -->
+                            <div class="box-footer">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
                         </form>
                     </div>
+                    <!-- /.box-body -->
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     @endsection

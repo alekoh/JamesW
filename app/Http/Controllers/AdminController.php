@@ -25,13 +25,60 @@ class AdminController extends BaseController
       return view('admin.home',compact('documents','companies','demands'));
 
     }
+    public function listDocuments(){
+        $documents = Document::all();
+        return view('admin.listDocuments',['documents'=>$documents]);
+    }
+    public function listCompanies(){
+        $companies = User::all();
+        return view('admin.listCompanies',['companies'=>$companies]);
+    }
+    public function listDemands(){
+        $demands = Demand::all();
+        return view('admin.listRequests',['demands'=>$demands]);
+    }
+    public function getPending(){
+        $documents = Document::all();
+        $pendingDocuments = [];
+        foreach ($documents as $pendingDoc){
+            if($pendingDoc->status==0){
+                array_push($pendingDocuments,$pendingDoc);
+            }
+        }
+        return view('admin.pendingDocuments',['pendingDocuments'=>$pendingDocuments]);
+    }
+    public function getDenied(){
+        $documents = Document::all();
+        $deniedDocuments = [];
+        foreach ($documents as $deniedDoc){
+            if($deniedDoc->status==-1){
+                array_push($deniedDocuments,$deniedDoc);
+            }
+        }
+        return view('admin.deniedDocuments',['deniedDocuments'=>$deniedDocuments]);
+    }
+    public function getAccepted(){
+        $documents = Document::all();
+        $acceptedDocuments = [];
+        foreach ($documents as $document) {
+            if($document->status==1){
+                array_push($acceptedDocuments,$document);
+            }
+        }
+        return view('admin.acceptedDocuments',['acceptedDocuments'=>$acceptedDocuments]);
+    }
+    /*get the Name from the company as a foreign key*/
     public static function getName($company_id){
         $company= User::find($company_id);
         return $company->name;
     }
-  /*  public function create(){
-        return view('requestForm');
+
+    /*Demands CRUD operations*/
+   public function create(){
+        $companies = User::all();
+        return view('admin.requestForm')->with('companies',$companies);
     }
+
     public function store(Request $request){
         $newDemand =  new Demand();
         $newDemand->company_id = $request->input('company_id');
@@ -40,8 +87,8 @@ class AdminController extends BaseController
 
 
         $newDemand->save();
-        return redirect('home');
-    }*/
+        return redirect('admin/dashboard');
+    }
 
     /*public function edit($id){
         $demand = Demand::find($id);

@@ -38,7 +38,7 @@ Route::group(['prefix' => 'company'], function (){
 
 Route::group(['prefix' => 'admin'], function () {
 
-     Route::get('/dashboard', 'AdminController@index');
+     Route::get('/dashboard', 'AdminController@index')->name('dashboard');
     Route::get('/login', 'AdminAuth\LoginController@showLoginForm');
     Route::post('/login', 'AdminAuth\LoginController@login');
     Route::post('/logout', 'AdminAuth\LoginController@logout');
@@ -51,7 +51,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm');
     Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
 
-    Route::get('/createRequest','AdminController@create');
+    Route::get('/createRequest','AdminController@create')->name('createRequest');
 
     Route::post('/createRequest','AdminController@store');
 
@@ -60,4 +60,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/editRequest/{id}','AdminController@update');
 
     Route::get('/deleteRequest/{id}','AdminController@destroy');*/
+    Route::get('/listCompanies','AdminController@listCompanies')->name('listCompanies');
+    Route::get('/listDocuments','AdminController@listDocuments')->name('listDocuments');
+    Route::get('/listRequests','AdminController@listDemands')->name('listRequests');
+    Route::get('/pending','AdminController@getPending')->name('pending');
+    Route::get('/denied','AdminController@getDenied')->name('denied');
 });

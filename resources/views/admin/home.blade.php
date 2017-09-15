@@ -1,9 +1,9 @@
 @extends('admin.layout.auth')
 
 @section('content')
-<div class="container">
+<section class="content">
     <div class="row">
-        <div class="col-md-8 col-md-offset-1">
+      {{--  <div class="col-md-8 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
 
@@ -11,115 +11,180 @@
                     You are logged in as Admin!
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            @foreach($documents as $document)
-                <div class="panel-group">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">Documents</div>
-                        <div class="panel-body">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Company name</th>
-                                        <th>Type</th>
-                                        <th>Status</th>
-                                        <th>Date of creation</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        {{$document->id}}&nbsp;
-                                    </td>
-                                    <td>
-                                        {{\App\Http\Controllers\AdminController::getName($document->company_id)}}&nbsp;
-                                    </td>
-                                    <td>
-                                        {{$document->value}}&nbsp;
-                                    </td>
-                                    <td>
-                                        {{$document->status}}&nbsp;
-                                    </td>
-                                    <td>
-                                        {{$document->created_at}}
-                                    </td>
-                                </tr>
+        </div>--}}
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <a href="{{route('pending')}}"><span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span></a>
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="info-box-content">
+                    <span class="info-box-text">Pending reviews</span>
+                    @foreach($documents as $document)
+                    @if($document->status === 0)
+                        <span class="info-box-number">{{count($documents)}}</span>
+                    @endif
+                        @endforeach
                 </div>
-            @endforeach
+                <!-- /.info-box-content -->
+            </div>
         </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="fa fa-files-o"></i></span>
 
-        <div class="col-md-4">
-            @foreach($companies as $company)
-                <div class="panel-group">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">Companies</div>
-                        <div class="panel-body">
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Company name</th>
-                                    <th>Company email</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        {{$company->id}}
-                                    </td>
-                                    <td>
-                                        {{$company->name}}
-                                    </td>
-                                    <td>
-                                        {{$company->email}}
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="info-box-content">
+                    <span class="info-box-text">Accepted</span>
+                    @foreach($documents as $document)
+                    @if($document->status === 1)
+                        <span class="info-box-number">{{count($document)}}</span>
+                    @endif
+                        @endforeach
                 </div>
-            @endforeach
+                <!-- /.info-box-content -->
+            </div>
         </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <a href="{{route('denied')}}"><span class="info-box-icon bg-red"><i class="fa fa-files-o"></i></span></a>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Denied</span>
+                    @foreach($documents as $document)
+                    @if($document->status === -1)
+                    <span class="info-box-number">{{count($documents)}}</span>
+                        @endif
+                        @endforeach
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+        </div>
+        {{--Documents--}}
         <div class="row">
-            <div class="col-md-4">
-                @foreach($demands as $demand)
-                    <div class="panel-group">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">Requests</div>
-                            <div class="panel-body">
-                                <table class="table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Company</th>
-                                        <th>Type of request</th>
-                                        <th>Created at</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            {{\App\Http\Controllers\AdminController::getName($demand->company_id)}}
-                                        </td>
-                                        <td>{{$demand->value}}</td>
-                                        <td>{{$demand->created_at}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><a href="{{route('listDocuments')}}">Documents</a></h3>
+
+                        <div class="box-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                            @foreach($documents as $document)
+                            <tr>
+                                <td>{{$document->id}}</td>
+                                <td>{{\App\Http\Controllers\AdminController::getName($document->company_id)}}</td>
+                                <td>{{$document->created_at}}</td>
+                                @if ($document->status === 0)
+                                    <td><span class="label label-warning">Pending</span></td>
+                                @elseif ($document->status === 1)
+                                    <td><span class="label label-success">Accepted</span></td>
+                                @elseif($document->status === -1)
+                                    <td><span class="label label-danger">Denied</span></td>
+                                @endif
+                            </tr>
+                                @endforeach
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        {{--Companies--}}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><a href="{{route('listCompanies')}}">Companies</a></h3>
+
+                        <div class="box-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            @foreach($companies as $company)
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                </tr>
+                                <tr>
+                                    <td>{{$company->id}}</td>
+                                    <td>{{$company->name}}</td>
+                                    <td>{{$company->email}}</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        {{--Requests--}}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"><a href="{{route('listRequests')}}">Requests</a></h3>
+
+                        <div class="box-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                                <tr>
+                                    <th>Company</th>
+                                    <th>Type of request</th>
+                                    <th>Date</th>
+                                </tr>
+                            @foreach($demands as $demand)
+                                <tr>
+                                    <td>
+                                        {{\App\Http\Controllers\AdminController::getName($demand->company_id)}}
+                                    </td>
+                                    <td>{{$demand->value}}</td>
+                                    <td>{{$demand->created_at}}</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
             </div>
         </div>
 
     </div>
-</div>
+</section>
 @endsection

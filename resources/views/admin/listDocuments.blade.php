@@ -26,6 +26,7 @@
                                     <th>User</th>
                                     <th>Date</th>
                                     <th>Status</th>
+                                    <th>Document</th>
                                 </tr>
                             @foreach($documents as $document)
                                 <tr>
@@ -39,6 +40,9 @@
                                     @elseif($document->status === -1)
                                         <td><span class="label label-danger">Denied</span></td>
                                     @endif
+                                    <td>
+                                        <a href="{{route('documentPreviewAdmin')}}" type="button" class="btn btn-primary btn-sm">Preview</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </table>

@@ -22,14 +22,28 @@
           apply the skin class to the body tag so the changes take effect.
     -->
     <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/dist/css/skins/skin-blue.min.css')}}">
-    <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
-    <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/plugins/datepicker/datepicker3.css')}}">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .example-modal .modal {
+            position: relative;
+            top: auto;
+            bottom: auto;
+            right: auto;
+            left: auto;
+            display: block;
+            z-index: 1;
+        }
+
+        .example-modal .modal {
+            background: transparent !important;
+        }
+    </style>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -58,11 +72,11 @@ desired effect
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="{{route('dashboard')}}" class="logo">
+        <a href="{{route('home')}}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>Logo</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>Logo</span>
+            <span class="logo-lg"><b>Company</b>Logo</span>
         </a>
 
         <!-- Header Navbar -->
@@ -90,7 +104,7 @@ desired effect
                                         <a href="#">
                                             <div class="pull-left">
                                                 <!-- User Image -->
-                                                <img src="{{asset('bower_components/AdminLTE/dist/img/avatar.png')}}" class="img-circle" alt="User Image">
+                                                <img src="{{asset('bower_components/AdminLTE/dist/img/avatar2.png')}}" class="img-circle" alt="User Image">
                                             </div>
                                             <!-- Message title and timestamp -->
                                             <h4>
@@ -115,16 +129,16 @@ desired effect
                         <!-- Menu toggle button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">2</span>
+                            <span class="label label-warning">3</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have 2 notifications</li>
+                            <li class="header">You have 3 notifications</li>
                             <li>
                                 <!-- Inner Menu: contains the notifications -->
                                 <ul class="menu">
                                     <li><!-- start notification -->
                                         <a href="#">
-                                            <i class="fa fa-users text-aqua"></i> 2 new documents were sent
+                                            <i class="fa fa-users text-aqua"></i> You have 3 new requests
                                         </a>
                                     </li>
                                     <!-- end notification -->
@@ -133,7 +147,7 @@ desired effect
                             <li class="footer"><a href="#">View all</a></li>
                         </ul>
                     </li>
-                  {{--  <!-- Tasks Menu -->
+                   {{-- <!-- Tasks Menu -->
                     <li class="dropdown tasks-menu">
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -174,31 +188,31 @@ desired effect
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="{{asset('bower_components/AdminLTE/dist/img/avatar.png')}}" class="user-image" alt="User Image">
+                            <img src="{{asset('bower_components/AdminLTE/dist/img/avatar2.png')}}" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">Administrator</span>
+                            <span class="hidden-xs">User</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="{{asset('bower_components/AdminLTE/dist/img/avatar.png')}}" class="img-circle" alt="User Image">
+                                <img src="{{asset('bower_components/AdminLTE/dist/img/avatar2.png')}}" class="img-circle" alt="User Image">
 
                                 <p>
-                                    Administrator
-                                    <small>Member since Aug. 2017</small>
+                                    User
+                                    <small>Member since Sep. 2017</small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
                             <li class="user-body">
                                 <div class="row">
                                     <div class="col-xs-4 text-center">
-                                        <a href="{{route('listCompanies')}}">Companies</a>
+                                        <a href="{{route('myRequests')}}">Requests</a>
                                     </div>
                                     <div class="col-xs-4 text-center">
-                                        <a href="{{route('listRequests')}}">Requests</a>
+                                        <a href="#"></a>
                                     </div>
                                     <div class="col-xs-4 text-center">
-                                        <a href="{{route('listDocuments')}}">Documents</a>
+                                        <a href="{{url('company/documents/listMyDocuments')}}">Documents</a>
                                     </div>
                                 </div>
                                 <!-- /.row -->
@@ -206,7 +220,7 @@ desired effect
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{{route('dashboard')}}" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{{route('home')}}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="#" class="btn btn-default btn-flat">Sign out</a>
@@ -231,10 +245,10 @@ desired effect
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{asset('bower_components/AdminLTE/dist/img/avatar.png')}}" class="img-circle" alt="User Image">
+                    <img src="{{asset('bower_components/AdminLTE/dist/img/avatar2.png')}}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Administrator</p>
+                    <p>User</p>
                     <!-- Status -->
                     {{--<a href="#"><i class="fa fa-circle text-success"></i> Online</a>--}}
                 </div>
@@ -256,17 +270,17 @@ desired effect
             <ul class="sidebar-menu">
                 <li class="header">Navigation</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="{{route('listCompanies')}}"><i class="fa fa-link"></i> <span>Companies</span></a></li>
-                <li><a href="{{'listDocuments'}}"><i class="fa fa-link"></i> <span>Documents</span></a></li>
+                <li class="active"><a href="{{route('home')}}"><i class="fa fa-link"></i> <span>Profile</span></a></li>
+                <li><a href="{{route('myRequests')}}"><i class="fa fa-link"></i> <span>Requests</span></a></li>
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Requests</span>
+                    <a href="#"><i class="fa fa-link"></i> <span>My Documents</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{route('listRequests')}}">All requests</a></li>
-                        <li><a href="{{route('createRequest')}}">New request</a></li>
+                        <li><a href="{{url('company/documents/listMyDocuments')}}">Submitted documents</a></li>
+                        <li><a href="{{route('create')}}">Upload new document</a></li>
                     </ul>
                 </li>
             </ul>
@@ -395,24 +409,13 @@ desired effect
 <script src="{{asset('bower_components/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="{{asset('bower_components/AdminLTE/bootstrap/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('bower_components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
-<script src="{{asset('bower_components/AdminLTE/plugins/datepicker/bootstrap-datepicker.js')}}"></script>
-<script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('bower_components/AdminLTE/dist/js/app.min.js')}}"></script>
+<script src="{{asset('bower_components/AdminLTE/plugins/fastclick/fastclick.js')}}"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
      fixed layout. -->
-{{--<script>
-    $(function () {
-        // Replace the <textarea id="editor1"> with a CKEditor
-        // instance, using default configuration.
-        CKEDITOR.replace('editor1');
-        //bootstrap WYSIHTML5 - text editor
-        $(".textarea").wysihtml5();
-    });
-</script>--}}
 </body>
 </html>

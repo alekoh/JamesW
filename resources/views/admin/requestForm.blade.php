@@ -29,11 +29,11 @@
                                     </div>
                                 @endforeach
                             <!-- textarea -->
-                            <div class="form-group">
+                            {{--<div class="form-group">
                                 <label>Description</label>
                                 <textarea class="form-control" id="exampleTextarea" rows="4" cols="7" name="value"></textarea>
-                            </div>
-                        {{-- <div class="form-group">
+                            </div>--}}
+                         <div class="form-group">
                              <div class="box">
                                  <div class="box-header">
                                      <h3 class="box-title">Description of the request
@@ -55,7 +55,7 @@
                                      </form>
                                  </div>
                              </div>
-                         </div>--}}
+                         </div>
                         <!-- select -->
                             <div class="box-footer">
                                 <div class="form-group">

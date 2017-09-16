@@ -68,4 +68,9 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    protected function showForm() {
+
+        return view('company.auth.register');
+    }
 }

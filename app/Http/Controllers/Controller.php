@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Demand;
 use App\Document;
+use App\Admin;
+use App\User;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -40,7 +42,7 @@ class Controller extends BaseController
             }
         }
 
-        return view('company.home', ['documents_approved' => $documents_approved, 'documents_declined' => $documents_declined, 'documents_review' => $documents_review, 'demands' => $demands]);
+        return view('company.home', ['documents_approved' => $documents_approved, 'documents_declined' => $documents_declined, 'documents_review' => $documents_review, 'demands' => $demands,'documents'=>$documents]);
     }
 
     public function createDocument(){
@@ -63,5 +65,39 @@ class Controller extends BaseController
         $newDocument->value = $request->input('document_value');
 
         $newDocument->save();
+
+        return redirect('company/company-requests');
     }
+    /*list all the documents from the given company*/
+    public function listMyDocuments(){
+
+
+        /* $my_id = User::find($id);*/
+        $allDocuments = Document::all();
+        $myDocuments = [];
+        foreach ($allDocuments as $document){
+            if($document->company_id == 1 ){
+                array_push($myDocuments,$document);
+            }
+        }
+
+        return view('company.documents.submits',['myDocuments'=>$myDocuments]);
+    }
+    /*list all the requests for the given company*/
+    public function listMyRequests(){
+        $allRequests = Demand::all();
+        $myRequests = [];
+        foreach ($allRequests as $myRequest){
+            if($myRequest->company_id == 1){
+                array_push($myRequests,$myRequest);
+            }
+        }
+        return view('company.company-requests',['myRequests'=>$myRequests]);
+    }
+    /*get the Name from the company as a foreign key*/
+    public static function getAdminName($admin_id){
+        $admin= Admin::find($admin_id);
+        return $admin->name;
+    }
+
 }

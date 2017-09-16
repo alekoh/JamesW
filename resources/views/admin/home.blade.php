@@ -3,24 +3,15 @@
 @section('content')
 <section class="content">
     <div class="row">
-      {{--  <div class="col-md-8 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    You are logged in as Admin!
-                </div>
-            </div>
-        </div>--}}
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="info-box">
                 <a href="{{route('pending')}}"><span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span></a>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Pending reviews</span>
+                    <span class="info-box-text">Pending submissions</span>
                     @foreach($documents as $document)
                     @if($document->status === 0)
-                        <span class="info-box-number">{{count($documents)}}</span>
+                        <span class="info-box-number">2</span>
                     @endif
                         @endforeach
                 </div>
@@ -32,10 +23,10 @@
                 <span class="info-box-icon bg-green"><i class="fa fa-files-o"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Accepted</span>
+                    <span class="info-box-text">Accepted submissions</span>
                     @foreach($documents as $document)
                     @if($document->status === 1)
-                        <span class="info-box-number">{{count($document)}}</span>
+                        <span class="info-box-number">0</span>
                     @endif
                         @endforeach
                 </div>
@@ -47,12 +38,10 @@
                 <a href="{{route('denied')}}"><span class="info-box-icon bg-red"><i class="fa fa-files-o"></i></span></a>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Denied</span>
-                    @foreach($documents as $document)
-                    @if($document->status === -1)
-                    <span class="info-box-number">{{count($documents)}}</span>
-                        @endif
-                        @endforeach
+                    <span class="info-box-text">Denied submissions</span>
+
+                    <span class="info-box-number">2</span>
+
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -82,6 +71,7 @@
                                 <th>User</th>
                                 <th>Date</th>
                                 <th>Status</th>
+                                <th>Document</th>
                             </tr>
                             @foreach($documents as $document)
                             <tr>
@@ -95,6 +85,9 @@
                                 @elseif($document->status === -1)
                                     <td><span class="label label-danger">Denied</span></td>
                                 @endif
+                                <td>
+                                    <a href="{{route('documentPreviewAdmin')}}" type="button" class="btn btn-primary btn-sm">Preview</a>
+                                </td>
                             </tr>
                                 @endforeach
                         </table>

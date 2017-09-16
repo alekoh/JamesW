@@ -21,19 +21,31 @@ Route::get('/welcome', function () {
     return view('landing-page.content');
 });
 
+Route::get('/login', function () {
+    return redirect('/company/login');
+});
+
+Route::post('/register', 'Auth\RegisterController@create');
 
 Route::group(['prefix' => 'company'], function (){
 
     Route::get('/login', 'Auth\LoginController@showLoginForm');
     Route::post('/login', 'Auth\LoginController@login');
-    Route::post('/logout', 'Auth\LoginController@logout');
-    Route::get('/home', 'Controller@index');
 
-    Route::get('/documents/create', 'Controller@createDocument');
+    Route::get('/register', 'Auth\RegisterController@showForm');
+    Route::post('/register', 'Auth\RegisterController@create');
+
+    Route::get('/home', 'Controller@index')->name('home');
+
+    Route::get('/documents/create', 'Controller@createDocument')->name('create');
     Route::post('/documents/create', 'Controller@storeDocument');
+    Route::get('/documents/listMyDocuments', ['uses' => 'Controller@listMyDocuments', 'as'=>'listMyDocuments']);
 
+    Route::get('/myRequests','Controller@listMyRequests')->name('myRequests');
 
-    Route::get('/login', 'Auth\LoginController@showLoginForm');
+    Route::get('/documentPreview',function (){
+        return view('company/documentPreview');
+    })->name('documentPreview');
 });
 
 Route::group(['prefix' => 'admin'], function () {
@@ -65,4 +77,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/listRequests','AdminController@listDemands')->name('listRequests');
     Route::get('/pending','AdminController@getPending')->name('pending');
     Route::get('/denied','AdminController@getDenied')->name('denied');
+
+    Route::get('/documentPreviewAdmin',function (){
+        return view('admin/documentPreviewAdmin');
+    })->name('documentPreviewAdmin');
 });

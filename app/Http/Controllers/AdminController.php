@@ -10,19 +10,16 @@ use App\Document;
 class AdminController extends BaseController
 {
 
-    /*public function __construct()
+    public function __construct()
     {
         $this->middleware('admin');
     }
 
-    public function index() {
-        return view('admin.home');
-    }*/
     public function index(){
-      $documents = Document::all();
+        $documents = Document::all();
         $companies = User::all();
-       $demands = Demand::all();
-      return view('admin.home',compact('documents','companies','demands'));
+        $demands = Demand::all();
+        return view('admin.home',compact('documents','companies','demands'));
 
     }
     public function listDocuments(){
@@ -74,7 +71,7 @@ class AdminController extends BaseController
     }
 
     /*Demands CRUD operations*/
-   public function create(){
+    public function create(){
         $companies = User::all();
         return view('admin.requestForm')->with('companies',$companies);
     }

@@ -9,11 +9,11 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Pending submissions</span>
-                    @foreach($documents as $document)
-                    @if($document->status === 0)
-                        <span class="info-box-number">2</span>
-                    @endif
-                        @endforeach
+
+                    {{--@if($document->status === 0)--}}
+                        <span class="info-box-number">{{  \App\Http\Controllers\AdminController::getSumPending()}}</span>
+                    {{--@endif--}}
+
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -24,11 +24,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Accepted submissions</span>
-                    @foreach($documents as $document)
-                    @if($document->status === 1)
-                        <span class="info-box-number">0</span>
-                    @endif
-                        @endforeach
+                        <span class="info-box-number">{{\App\Http\Controllers\AdminController::getSumAccepted()}}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -40,7 +36,7 @@
                 <div class="info-box-content">
                     <span class="info-box-text">Denied submissions</span>
 
-                    <span class="info-box-number">2</span>
+                    <span class="info-box-number">{{\App\Http\Controllers\AdminController::getSumDenied()}}</span>
 
                 </div>
                 <!-- /.info-box-content -->

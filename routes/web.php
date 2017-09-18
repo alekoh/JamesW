@@ -63,15 +63,23 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm');
     Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
 
+    /*add request*/
     Route::get('/createRequest','AdminController@create')->name('createRequest');
 
     Route::post('/createRequest','AdminController@store');
 
- /*   Route::get('/editRequest/{id}','AdminController@edit');
+    /*   Route::get('/editRequest/{id}','AdminController@edit');
 
     Route::post('/editRequest/{id}','AdminController@update');
 
     Route::get('/deleteRequest/{id}','AdminController@destroy');*/
+
+    /*add company*/
+
+    Route::get('/addCompany','AdminController@createCompany');
+    Route::get('/addCompany','AdminController@storeCompany');
+
+
     Route::get('/listCompanies','AdminController@listCompanies')->name('listCompanies');
     Route::get('/listDocuments','AdminController@listDocuments')->name('listDocuments');
     Route::get('/listRequests','AdminController@listDemands')->name('listRequests');

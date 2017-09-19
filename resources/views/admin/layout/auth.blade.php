@@ -255,8 +255,17 @@ desired effect
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu">
                 <li class="header">Navigation</li>
-                <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="{{route('listCompanies')}}"><i class="fa fa-link"></i> <span>Companies</span></a></li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Companies</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{route('listCompanies')}}">All companies</a></li>
+                        <li><a href="#">Add company</a></li>
+                    </ul>
+                </li>
                 <li><a href="{{'listDocuments'}}"><i class="fa fa-link"></i> <span>Documents</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>Requests</span>

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use DB;
 use App\Demand;
 use App\User;
 use Illuminate\Routing\Controller as BaseController;
@@ -64,6 +66,7 @@ class AdminController extends BaseController
         }
         return view('admin.acceptedDocuments',['acceptedDocuments'=>$acceptedDocuments]);
     }
+
     /*get the Name from the company as a foreign key*/
     public static function getName($company_id){
         $company= User::find($company_id);
@@ -86,8 +89,7 @@ class AdminController extends BaseController
         $newDemand->save();
         return redirect('admin/dashboard');
     }
-
-    /*public function edit($id){
+    public function edit($id){
         $demand = Demand::find($id);
         return view('/requestForm')->with('demand',$demand);
     }
@@ -98,6 +100,60 @@ class AdminController extends BaseController
     }
     public function destroy($id){
         Demand::find($id)->delete();
+
+        return redirect('admin/dashboard');
+    }
+
+
+    /*Company CRUD operations*/
+
+    public function createCompany(){
+        return view('admin.addCompany');
+    }
+    public function storeCompany(Request $request){
+        $newCompany = new User();
+
+        $newCompany->name = $request->input('company_name');
+        $newCompany->email = $request->input('company_email');
+        $newCompany->password = $request->input('company_password');
+
+        $newCompany->save();
+
+        return redirect('admin/listCompanies');
+    }
+    /*public function editCompany($id){
+        $company = User::find($id);
+        return view('/addCompany')->with('company',$company);
+    }
+
+    public function update(Request $request, $id){
+        User::find($id)->update($request->all());
+        return redirect('home');
+    }
+    public function destroy($id){
+        User::find($id)->delete();
         return redirect('home');
     }*/
+
+    /*count the pending documents*/
+    public static function getSumPending() {
+
+        $countPending = \DB::table('documents')->where('status','=',0)->count('id');
+
+        return $countPending;
+    }
+    /*count the denied documents*/
+    public static function getSumDenied(){
+        $countDenied = \DB::table('documents')->where('status','=',-1)->count('id');
+
+        return $countDenied;
+    }
+    /*count the accepted documents*/
+    public static function getSumAccepted(){
+
+        $countAccepted = \DB::table('documents')->where('status','=',1)->count('id');
+
+        return $countAccepted;
+    }
+
 }

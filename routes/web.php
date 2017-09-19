@@ -50,7 +50,8 @@ Route::group(['prefix' => 'company'], function (){
 
 Route::group(['prefix' => 'admin'], function () {
 
-     Route::get('/dashboard', 'AdminController@index')->name('dashboard');
+    Route::get('/dashboard', 'AdminController@index')->name('dashboard');
+
     Route::get('/login', 'AdminAuth\LoginController@showLoginForm');
     Route::post('/login', 'AdminAuth\LoginController@login');
     Route::post('/logout', 'AdminAuth\LoginController@logout');
@@ -63,15 +64,22 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm');
     Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
 
+    /*add request*/
     Route::get('/createRequest','AdminController@create')->name('createRequest');
 
     Route::post('/createRequest','AdminController@store');
 
- /*   Route::get('/editRequest/{id}','AdminController@edit');
+    Route::get('/editRequest/{id}','AdminController@edit');
 
     Route::post('/editRequest/{id}','AdminController@update');
 
-    Route::get('/deleteRequest/{id}','AdminController@destroy');*/
+    Route::get('deleteRequest/{id}','AdminController@destroy')->name('deleteRequest');
+
+    /*add company*/
+
+    Route::get('/addCompany','AdminController@createCompany');
+    Route::post('/addCompany','AdminController@storeCompany');
+
     Route::get('/listCompanies','AdminController@listCompanies')->name('listCompanies');
     Route::get('/listDocuments','AdminController@listDocuments')->name('listDocuments');
     Route::get('/listRequests','AdminController@listDemands')->name('listRequests');

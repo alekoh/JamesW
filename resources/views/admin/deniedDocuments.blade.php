@@ -33,6 +33,9 @@
                                     <td>{{\App\Http\Controllers\AdminController::getName($deniedDoc->company_id)}}</td>
                                     <td>{{$deniedDoc->created_at}}</td>
                                     <td><span class="label label-danger">Denied</span></td>
+                                    <td>
+                                        <a href="{{route('documentPreviewAdmin')}}" type="button" class="btn btn-primary btn-sm">Preview</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </table>

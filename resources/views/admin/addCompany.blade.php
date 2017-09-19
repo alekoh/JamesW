@@ -16,15 +16,15 @@
                             <div class="form-group">
                                 <label for="company_name" class="control-label">Company name</label>
                                 <input type="hidden" name="company_id" value="id">
-                                <input id="company_name" type="text" class="form-control" name="company_name" value="{!! csrf_token() !!}" autofocus>
+                                <input id="company_name" type="text" class="form-control" name="company_name" value="" autofocus>
                             </div>
                             <div class="form-group">
-                                <label for="email" class="control-label">Email</label>
-                                <input id="email" type="text" class="form-control" name="company_name" value="{{ ('email') }}" autofocus>
+                                <label for="company_email" class="control-label">Email</label>
+                                <input id="company_email" type="text" class="form-control" name="company_email" value="">
                             </div>
                             <div class="form-group">
-                                <label for="password" class="control-label">Password</label>
-                                <input id="password" type="text" class="form-control" name="company_name" value="{{ ('password') }}" autofocus>
+                                <label for="company_password" class="control-label">Password</label>
+                                <input id="company_password" type="text" class="form-control" name="company_password" value="">
                             </div>
 
                             <!-- select -->

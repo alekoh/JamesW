@@ -66,6 +66,7 @@ class AdminController extends BaseController
         }
         return view('admin.acceptedDocuments',['acceptedDocuments'=>$acceptedDocuments]);
     }
+
     /*get the Name from the company as a foreign key*/
     public static function getName($company_id){
         $company= User::find($company_id);
@@ -88,7 +89,7 @@ class AdminController extends BaseController
         $newDemand->save();
         return redirect('admin/dashboard');
     }
-    /*public function edit($id){
+    public function edit($id){
         $demand = Demand::find($id);
         return view('/requestForm')->with('demand',$demand);
     }
@@ -99,21 +100,22 @@ class AdminController extends BaseController
     }
     public function destroy($id){
         Demand::find($id)->delete();
-        return redirect('home');
-    }*/
+
+        return redirect('admin/dashboard');
+    }
 
 
     /*Company CRUD operations*/
 
     public function createCompany(){
-        return view('addCompany');
+        return view('admin.addCompany');
     }
     public function storeCompany(Request $request){
         $newCompany = new User();
 
-        $newCompany->name = $request->input('name');
-        $newCompany->email = $request->input('email');
-        $newCompany->password = $request->input('password');
+        $newCompany->name = $request->input('company_name');
+        $newCompany->email = $request->input('company_email');
+        $newCompany->password = $request->input('company_password');
 
         $newCompany->save();
 

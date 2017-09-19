@@ -33,6 +33,9 @@
                                     <td>{{\App\Http\Controllers\AdminController::getName($pendingDoc->company_id)}}</td>
                                     <td>{{$pendingDoc->created_at}}</td>
                                     <td><span class="label label-warning">Pending</span></td>
+                                    <td>
+                                        <a href="{{route('documentPreviewAdmin')}}" type="button" class="btn btn-primary btn-sm">Preview</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </table>

@@ -25,6 +25,7 @@
                                 <th>Company</th>
                                 <th>Type of request</th>
                                 <th>Date</th>
+                                <td>Action</td>
                             </tr>
                             @foreach($demands as $demand)
                                 <tr>
@@ -33,6 +34,7 @@
                                     </td>
                                     <td>{{$demand->value}}</td>
                                     <td>{{$demand->created_at}}</td>
+                                    <td><a type="button" href="{{route('deleteRequest', $demand->id)}}" class="btn btn-danger">Delete</a></td>
                                 </tr>
                             @endforeach
                         </table>

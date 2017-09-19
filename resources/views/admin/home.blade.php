@@ -113,12 +113,12 @@
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
-                            @foreach($companies as $company)
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                 </tr>
+                            @foreach($companies as $company)
                                 <tr>
                                     <td>{{$company->id}}</td>
                                     <td>{{$company->name}}</td>

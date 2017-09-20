@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Document;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends BaseController
 {
@@ -26,45 +27,30 @@ class AdminController extends BaseController
     }
     public function listDocuments(){
         $documents = Document::all();
-        return view('admin.listDocuments',['documents'=>$documents]);
+        return view('admin.documents.listDocuments',['documents'=>$documents]);
     }
     public function listCompanies(){
         $companies = User::all();
-        return view('admin.listCompanies',['companies'=>$companies]);
+        return view('admin.companies.listCompanies',['companies'=>$companies]);
     }
     public function listDemands(){
         $demands = Demand::all();
-        return view('admin.listRequests',['demands'=>$demands]);
+        return view('admin.requests.listRequests',['demands'=>$demands]);
     }
     public function getPending(){
-        $documents = Document::all();
-        $pendingDocuments = [];
-        foreach ($documents as $pendingDoc){
-            if($pendingDoc->status==0){
-                array_push($pendingDocuments,$pendingDoc);
-            }
-        }
-        return view('admin.pendingDocuments',['pendingDocuments'=>$pendingDocuments]);
+        $pendingDocuments = \DB::table('documents')->where('status','=',0)->get();
+
+        return view('admin.documents.pendingDocuments',['pendingDocuments'=>$pendingDocuments]);
     }
     public function getDenied(){
-        $documents = Document::all();
-        $deniedDocuments = [];
-        foreach ($documents as $deniedDoc){
-            if($deniedDoc->status==-1){
-                array_push($deniedDocuments,$deniedDoc);
-            }
-        }
-        return view('admin.deniedDocuments',['deniedDocuments'=>$deniedDocuments]);
+
+        $deniedDocuments = \DB::table('documents')->where('status','=',-1)->get();
+        return view('admin.documents.deniedDocuments',['deniedDocuments'=>$deniedDocuments]);
     }
     public function getAccepted(){
-        $documents = Document::all();
-        $acceptedDocuments = [];
-        foreach ($documents as $document) {
-            if($document->status==1){
-                array_push($acceptedDocuments,$document);
-            }
-        }
-        return view('admin.acceptedDocuments',['acceptedDocuments'=>$acceptedDocuments]);
+        $acceptedDocuments = \DB::table('documents')->where('status','=',1)->get();
+
+        return view('admin.documents.acceptedDocuments',['acceptedDocuments'=>$acceptedDocuments]);
     }
 
     /*get the Name from the company as a foreign key*/
@@ -76,7 +62,7 @@ class AdminController extends BaseController
     /*Demands CRUD operations*/
     public function create(){
         $companies = User::all();
-        return view('admin.requestForm')->with('companies',$companies);
+        return view('admin.requests.requestForm')->with('companies',$companies);
     }
 
     public function store(Request $request){
@@ -87,11 +73,11 @@ class AdminController extends BaseController
 
 
         $newDemand->save();
-        return redirect('admin/dashboard');
+        return redirect('admin/requests/listRequests');
     }
     public function edit($id){
         $demand = Demand::find($id);
-        return view('/requestForm')->with('demand',$demand);
+        return view('requestForm')->with('demand',$demand);
     }
 
     public function update(Request $request, $id){
@@ -101,25 +87,37 @@ class AdminController extends BaseController
     public function destroy($id){
         Demand::find($id)->delete();
 
-        return redirect('admin/dashboard');
+        return redirect('admin/requests/listRequests');
     }
 
 
     /*Company CRUD operations*/
 
     public function createCompany(){
-        return view('admin.addCompany');
+        return view('admin.companies.addCompany');
     }
     public function storeCompany(Request $request){
         $newCompany = new User();
+
+        $newCompanyEmail = $request->input('company_email');
 
         $newCompany->name = $request->input('company_name');
         $newCompany->email = $request->input('company_email');
         $newCompany->password = $request->input('company_password');
 
-        $newCompany->save();
+        User::create([
+            'name' => $request->input('company_name'),
+            'email' => $request->input('company_email'),
+            'password' => bcrypt($request->input('company_password')),
+        ]);
 
-        return redirect('admin/listCompanies');
+        Mail::send('email', ['email' => $newCompanyEmail], function ($m) use ($newCompanyEmail) {
+            $m->from('alek.oh@hotmail.com', 'Contentifly');
+
+            $m->to($newCompanyEmail)->subject('Reminder for new profile!');
+        });
+
+        return redirect('admin/companies/listCompanies');
     }
     /*public function editCompany($id){
         $company = User::find($id);

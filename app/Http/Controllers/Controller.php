@@ -51,22 +51,27 @@ class Controller extends BaseController
 
     public function storeDocument(Request $request){
 
-        $company_id = $this->get('id');
+        $company_id = Auth::user()->id;
 
-        $request->validate([
-            'document_name' => 'required',
-            'document_value' => 'required',
-            'document_description' => 'min:15'
-        ]);
+        $file = $request->file('blob_value');
+        $content = $file->openFile()->fread($file->getSize());
+
+//        $request->validate([
+//            'document_name' => 'required',
+//            'document_value' => 'required',
+//            'document_description' => 'min:15'
+//        ]);
 
         $newDocument = new Document();
         $newDocument->company_id = $company_id;
         $newDocument->name = $request->input('document_name');
         $newDocument->value = $request->input('document_value');
+        $newDocument->blob_value = $content;
+        $newDocument->size = $file->getSize();
 
         $newDocument->save();
 
-        return redirect('company/company-requests');
+        return redirect('company/home');
     }
     /*list all the documents from the given company*/
     public function listMyDocuments(){
@@ -74,6 +79,8 @@ class Controller extends BaseController
 
         /* $my_id = User::find($id);*/
         $allDocuments = Document::all();
+
+        //todo: Sort the documents according to their status
         $myDocuments = [];
         foreach ($allDocuments as $document){
             if($document->company_id == 1 ){
@@ -81,7 +88,7 @@ class Controller extends BaseController
             }
         }
 
-        return view('company.documents.submits',['myDocuments'=>$myDocuments]);
+        return view('company.documents.submits',['myDocuments'=>$allDocuments]);
     }
     /*list all the requests for the given company*/
     public function listMyRequests(){

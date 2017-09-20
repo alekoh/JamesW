@@ -11,7 +11,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="post" action="{{url('/company/documents/create')}}">
+                <form role="form" method="post" enctype="multipart/form-data" action="{{url('/company/documents/create')}}">
                     {{ csrf_field() }}
                     <div class="box-body">
                         <div class="form-group">
@@ -20,12 +20,12 @@
                         </div>
                         <div class="form-group">
                             <label for="document_value">Document</label>
-                            <input type="file" id="document_value">
+                            <input type="file" id="document_value" name="blob_value">
 
                         </div>
                         <div class="form-group">
                             <label for="document_comment">Message</label>
-                            <textarea row="11" cols="5" class="form-control" name="document_comment" id="document_comment"></textarea>
+                            <textarea row="11" cols="5" class="form-control" name="document_value" id="document_comment"></textarea>
                         </div>
                     </div>
                     <!-- /.box-body -->

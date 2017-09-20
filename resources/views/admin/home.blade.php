@@ -49,7 +49,7 @@
                     <div class="box-header">
                         <h3 class="box-title"><a href="{{route('listDocuments')}}">Documents</a></h3>
 
-                        <div class="box-tools">
+                        {{--<div class="box-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
 
@@ -57,6 +57,10 @@
                                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                                 </div>
                             </div>
+                        </div>--}}
+                        <div class="pull-right box-tools">
+                            <button type="button" class="btn btn-outline-light btn-sm" data-widget="collapse" data-toggle="tooltip">
+                                <i class="fa fa-minus"></i></button>
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -100,7 +104,7 @@
                     <div class="box-header">
                         <h3 class="box-title"><a href="{{route('listCompanies')}}">Companies</a></h3>
 
-                        <div class="box-tools">
+                        {{--<div class="box-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
 
@@ -108,6 +112,11 @@
                                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                                 </div>
                             </div>
+                        </div>
+--}}
+                        <div class="pull-right box-tools">
+                            <button type="button" class="btn btn-outline-light btn-sm" data-widget="collapse" data-toggle="tooltip">
+                                <i class="fa fa-minus"></i></button>
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -139,7 +148,7 @@
                     <div class="box-header">
                         <h3 class="box-title"><a href="{{route('listRequests')}}">Requests</a></h3>
 
-                        <div class="box-tools">
+                        {{--<div class="box-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
 
@@ -147,6 +156,11 @@
                                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                                 </div>
                             </div>
+                        </div>--}}
+
+                        <div class="pull-right box-tools">
+                            <button type="button" class="btn btn-outline-light btn-sm" data-widget="collapse" data-toggle="tooltip">
+                                <i class="fa fa-minus"></i></button>
                         </div>
                     </div>
                     <!-- /.box-header -->

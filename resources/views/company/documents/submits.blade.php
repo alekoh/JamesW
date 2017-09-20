@@ -23,6 +23,7 @@
                     <table class="table table-hover">
                         <tr>
                             <th>Document ID</th>
+                            <th>Name</th>
                             <th>Date</th>
                             <th>Status</th>
                             <th>Document</th>
@@ -30,6 +31,7 @@
                         @foreach($myDocuments as $document)
                             <tr>
                                 <td>{{$document->id}}</td>
+                                <td>{{$document->name}}</td>
                                 <td>{{$document->created_at}}</td>
                                 @if ($document->status === 0)
                                     <td><span class="label label-warning">Pending</span></td>

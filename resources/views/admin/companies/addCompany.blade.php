@@ -10,12 +10,12 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <form role="form" method="POST" action="{{ url('/admin/addCompany') }}">
+                        <form role="form" method="POST" action="{{ url('/admin/companies/addCompany') }}">
                         {{ csrf_field() }}
                         <!-- text input -->
                             <div class="form-group">
                                 <label for="company_name" class="control-label">Company name</label>
-                                <input type="hidden" name="company_id" value="id">
+                                <input type="hidden" name="admin_id" value="">
                                 <input id="company_name" type="text" class="form-control" name="company_name" value="" autofocus>
                             </div>
                             <div class="form-group">
@@ -24,7 +24,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="company_password" class="control-label">Password</label>
-                                <input id="company_password" type="text" class="form-control" name="company_password" value="">
+                                <input id="company_password" type="password" class="form-control" name="company_password" value="">
                             </div>
 
                             <!-- select -->

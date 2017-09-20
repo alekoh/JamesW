@@ -65,28 +65,28 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
 
     /*add request*/
-    Route::get('/createRequest','AdminController@create')->name('createRequest');
+    Route::get('requests/createRequest','AdminController@create')->name('createRequest');
 
-    Route::post('/createRequest','AdminController@store');
+    Route::post('requests/createRequest','AdminController@store');
 
-    Route::get('/editRequest/{id}','AdminController@edit');
+    Route::get('requests/editRequest/{id}','AdminController@edit');
 
-    Route::post('/editRequest/{id}','AdminController@update');
+    Route::post('requests/editRequest/{id}','AdminController@update');
 
-    Route::get('deleteRequest/{id}','AdminController@destroy')->name('deleteRequest');
+    Route::get('requests/deleteRequest/{id}','AdminController@destroy')->name('deleteRequest');
 
     /*add company*/
 
-    Route::get('/addCompany','AdminController@createCompany');
-    Route::post('/addCompany','AdminController@storeCompany');
+    Route::get('companies/addCompany','AdminController@createCompany')->name('addCompany');
+    Route::post('companies/addCompany','AdminController@storeCompany');
 
-    Route::get('/listCompanies','AdminController@listCompanies')->name('listCompanies');
-    Route::get('/listDocuments','AdminController@listDocuments')->name('listDocuments');
-    Route::get('/listRequests','AdminController@listDemands')->name('listRequests');
-    Route::get('/pending','AdminController@getPending')->name('pending');
-    Route::get('/denied','AdminController@getDenied')->name('denied');
+    Route::get('companies/listCompanies','AdminController@listCompanies')->name('listCompanies');
+    Route::get('documents/listDocuments','AdminController@listDocuments')->name('listDocuments');
+    Route::get('requests/listRequests','AdminController@listDemands')->name('listRequests');
+    Route::get('documents/pending','AdminController@getPending')->name('pending');
+    Route::get('documents/denied','AdminController@getDenied')->name('denied');
 
-    Route::get('/documentPreviewAdmin',function (){
-        return view('admin/documentPreviewAdmin');
+    Route::get('documents/documentPreviewAdmin',function (){
+        return view('admin.documents.documentPreviewAdmin');
     })->name('documentPreviewAdmin');
 });

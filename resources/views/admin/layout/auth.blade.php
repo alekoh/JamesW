@@ -209,15 +209,15 @@ desired effect
                                     <a href="{{route('dashboard')}}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{route('logout')}}" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
                     </li>
                     <!-- Control Sidebar Toggle Button -->
-                    <li>
+                    {{--<li>
                         <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>
+                    </li>--}}
                 </ul>
             </div>
         </nav>
@@ -234,7 +234,7 @@ desired effect
                     <img src="{{asset('bower_components/AdminLTE/dist/img/avatar.png')}}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Administrator</p>
+                    <a href="{{route('dashboard')}}" style="font-size: larger;" >Administrator</a>
                     <!-- Status -->
                     {{--<a href="#"><i class="fa fa-circle text-success"></i> Online</a>--}}
                 </div>
@@ -263,10 +263,10 @@ desired effect
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{route('listCompanies')}}">All companies</a></li>
-                        <li><a href="#">Add company</a></li>
+                        <li><a href="{{route('addCompany')}}">Add company</a></li>
                     </ul>
                 </li>
-                <li><a href="{{'listDocuments'}}"><i class="fa fa-link"></i> <span>Documents</span></a></li>
+                <li><a href="{{route('listDocuments')}}"><i class="fa fa-link"></i> <span>Documents</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>Requests</span>
                         <span class="pull-right-container">
@@ -320,7 +320,7 @@ desired effect
     </footer>
 
     <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
+    {{--<aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
             <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
@@ -390,7 +390,7 @@ desired effect
             </div>
             <!-- /.tab-pane -->
         </div>
-    </aside>
+    </aside>--}}
     <!-- /.control-sidebar -->
     <!-- Add the sidebar's background. This div must be placed
          immediately after the control sidebar -->

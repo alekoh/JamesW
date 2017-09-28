@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Demand;
 use App\Document;
 use App\Admin;
@@ -107,4 +108,32 @@ class Controller extends BaseController
         return $admin->name;
     }
 
+    /*document preview*/
+    /*public function documentPreview(Request $request,$id){
+       $document = Document::find($id);
+       $documentName = $request->file('blob_value');
+       /*$documentValue = Document::find($id)->get('value');*/
+
+       /* return view('company.documentPreview',['documentName'=>$documentName]);*/
+    /*}*/
+
+    public function getPending(){
+
+        $id = Auth::user()->id;
+
+        $pendingDocuments = \DB::table('documents')->where('company_id','=',$id)->where('status','=',0)->get();
+
+        return view('company.documents.pendingDocuments',['pendingDocuments'=>$pendingDocuments]);
+    }
+    public function getDenied(){
+
+        $deniedDocuments = \DB::table('documents')->where('status','=',-1)->get();
+
+        return view('company.documents.deniedDocuments',['deniedDocuments'=>$deniedDocuments]);
+    }
+    public function getAccepted(){
+        $acceptedDocuments = \DB::table('documents')->where('status','=',1)->get();
+
+        return view('company.documents.acceptedDocuments',['acceptedDocuments'=>$acceptedDocuments]);
+    }
 }

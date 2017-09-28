@@ -24,7 +24,7 @@ class Submits extends Migration
             $table->unsignedInteger('admin_id');
             $table->foreign('admin_id')->references('id')->on('admins');
 
-            $table->string('value');
+            $table->text('value');
             $table->float('size');
 
             $table->tinyInteger('status')->default('0');

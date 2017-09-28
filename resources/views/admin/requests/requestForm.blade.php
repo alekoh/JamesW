@@ -23,7 +23,7 @@
                             <div class="form-group">
                                 <label>Choose Company</label>
                                 @foreach($companies as $company)
-                                    <input type="hidden" name="company_id" value="{{$company->id}}">
+                                    <input type="hidden" name="company_id" value="11">
                                 @endforeach
                                 <select class="form-control" data-toggle="dropdown" type="button">
                                     @foreach($companies as $company)

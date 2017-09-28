@@ -10,7 +10,7 @@
                             <h3 class="box-title">Document content</h3>
                         </div>
                         <div class="col-md-3 col-md-offset-3">
-                            <p><strong>Status&nbsp</strong><span class="label label-warning">Pending</span></p>
+                            {{--<p><strong>Status&nbsp</strong><span class="label label-warning">Pending</span></p>--}}
                         </div>
                     </div>
                     <!-- /.box-header -->

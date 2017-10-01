@@ -176,7 +176,7 @@ desired effect
                             <!-- The user image in the navbar-->
                             <img src="{{asset('bower_components/AdminLTE/dist/img/avatar.png')}}" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">Administrator</span>
+                            <span class="hidden-xs"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
@@ -234,7 +234,7 @@ desired effect
                     <img src="{{asset('bower_components/AdminLTE/dist/img/avatar.png')}}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <a href="{{route('dashboard')}}" style="font-size: larger;" >Administrator</a>
+                    <a href="{{route('dashboard')}}" style="font-size: larger;" >{{ \App\Http\Controllers\AdminController::getNameAdmin() }}</a>
                     <!-- Status -->
                     {{--<a href="#"><i class="fa fa-circle text-success"></i> Online</a>--}}
                 </div>

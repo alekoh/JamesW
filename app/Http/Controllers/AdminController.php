@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Document;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class AdminController extends BaseController
@@ -153,5 +154,12 @@ class AdminController extends BaseController
 
         return $countAccepted;
     }
+    /*find the current logged in admin*/
+    public static function getNameAdmin(){
 
+        dd(auth()->user());
+
+       return Auth::user()->name;
+
+    }
 }

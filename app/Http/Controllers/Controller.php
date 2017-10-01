@@ -26,26 +26,57 @@ class Controller extends BaseController
     }
 
     public function index() {
+
+        $id = Auth::user()->id;
         $documents = Document::all();
         $demands = Demand::all();
+
 
         $documents_approved = [];
         $documents_declined = [];
         $documents_review = [];
 
         foreach ($documents as $document) {
-            if ($document->status == 1) {
-                array_push($documents_approved, $document);
-            } else if ($document->status == -1) {
-                array_push($documents_declined, $document);
-            } else if ($document->status == 0) {
-                array_push($documents_review, $document);
+            if($document->company_id == $id){
+                if ($document->status == 1) {
+                    array_push($documents_approved, $document);
+                } else if ($document->status == -1) {
+                    array_push($documents_declined, $document);
+                } else if ($document->status == 0) {
+                    array_push($documents_review, $document);
+                }
             }
         }
 
         return view('company.home', ['documents_approved' => $documents_approved, 'documents_declined' => $documents_declined, 'documents_review' => $documents_review, 'demands' => $demands,'documents'=>$documents]);
     }
 
+    public function getInfo(){
+
+        $id = Auth::user()->id;
+        $name = Auth::user()->name;
+        $email = Auth::user()->email;
+
+        return view('company.profile',compact('id','name','email'));
+
+    }
+
+    public function uploadPhoto(Request $request, $id){
+
+        $id = Auth::user()->id;
+
+        $file = $request->file('photo');
+        if ($request->file('photo')->isValid()) {
+
+            // get the upload file path
+            $realpath = $file->getRealPath();
+
+            // ... then load the file in to a var and assign to the db array
+
+        } else {
+            return view('profile')->with('There has been an error');
+        }
+    }
     public function createDocument(){
         return view('company.documents.create');
     }
@@ -77,14 +108,13 @@ class Controller extends BaseController
     /*list all the documents from the given company*/
     public function listMyDocuments(){
 
-
-        /* $my_id = User::find($id);*/
         $allDocuments = Document::all();
-
-        //todo: Sort the documents according to their status
         $myDocuments = [];
+
+        $id = Auth::user()->id;
+
         foreach ($allDocuments as $document){
-            if($document->company_id == 1 ){
+            if($document->company_id == $id ){
                 array_push($myDocuments,$document);
             }
         }
@@ -94,13 +124,14 @@ class Controller extends BaseController
     /*list all the requests for the given company*/
     public function listMyRequests(){
         $allRequests = Demand::all();
+        $id = Auth::user()->id;
         $myRequests = [];
         foreach ($allRequests as $myRequest){
-            if($myRequest->company_id == 1){
+            if($myRequest->company_id == $id){
                 array_push($myRequests,$myRequest);
             }
         }
-        return view('company.company-requests',['myRequests'=>$myRequests]);
+        return view('company.requests.company-requests',['myRequests'=>$myRequests]);
     }
     /*get the Name from the company as a foreign key*/
     public static function getAdminName($admin_id){
@@ -127,13 +158,25 @@ class Controller extends BaseController
     }
     public function getDenied(){
 
-        $deniedDocuments = \DB::table('documents')->where('status','=',-1)->get();
+        $id = Auth::user()->id;
+
+        $deniedDocuments = \DB::table('documents')->where('company_id','=',$id)->where('status','=',-1)->get();
 
         return view('company.documents.deniedDocuments',['deniedDocuments'=>$deniedDocuments]);
     }
     public function getAccepted(){
-        $acceptedDocuments = \DB::table('documents')->where('status','=',1)->get();
+
+        $id = Auth::user()->id;
+
+        $acceptedDocuments = \DB::table('documents')->where('company_id','=',$id)->where('status','=',1)->get();
 
         return view('company.documents.acceptedDocuments',['acceptedDocuments'=>$acceptedDocuments]);
+    }
+
+    /*return company name*/
+    public static function getNameCompany(){
+
+        return Auth::user()->name;
+
     }
 }

@@ -50,8 +50,10 @@ Route::group(['prefix' => 'company'], function (){
     /*Route::get('/documentPreview/{id}','Controller@documentPreview')->name('documentPreview');*/
 
     Route::get('documents/documentPreview',function (){
-        return view('company.documentPreview');
+        return view('company.documents.documentPreview');
     })->name('documentPreview');
+
+    Route::get('profile', 'Controller@getInfo')->name('profile');
 });
 
 Route::group(['prefix' => 'admin'], function () {

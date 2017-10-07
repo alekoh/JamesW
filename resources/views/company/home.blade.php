@@ -10,9 +10,10 @@
                         </a></div>
                 </div>
             </div>--}}
+
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="info-box">
-                    <a href="{{route('pending')}}"><span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span></a>
+                    <a href="{{route('pendingDocuments')}}"><span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span></a>
 
                     <div class="info-box-content">
                         <span class="info-box-text">Pending submissions</span>
@@ -38,7 +39,7 @@
             </div>
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="info-box">
-                    <a href="{{route('denied')}}"><span class="info-box-icon bg-red"><i class="fa fa-files-o"></i></span></a>
+                    <a href="{{route('deniedDocuments')}}"><span class="info-box-icon bg-red"><i class="fa fa-files-o"></i></span></a>
 
                     <div class="info-box-content">
                         <span class="info-box-text">Denied submissions</span>
@@ -55,7 +56,7 @@
                         <div class="box-header">
                             <h3 class="box-title"><a href="{{url('company/documents/listMyDocuments')}}">Documents</a></h3>
 
-                            <div class="box-tools">
+                            {{--<div class="box-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                     <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
 
@@ -63,6 +64,10 @@
                                         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                                     </div>
                                 </div>
+                            </div>--}}
+                            <div class="pull-right box-tools">
+                                <button type="button" class="btn btn-outline-light btn-sm" data-widget="collapse" data-toggle="tooltip">
+                                    <i class="fa fa-minus"></i></button>
                             </div>
                         </div>
                         <!-- /.box-header -->
@@ -106,7 +111,7 @@
                         <div class="box-header">
                             <h3 class="box-title"><a href="{{route('myRequests')}}">Requests</a></h3>
 
-                            <div class="box-tools">
+                            {{--<div class="box-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                     <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
 
@@ -114,6 +119,10 @@
                                         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                                     </div>
                                 </div>
+                            </div>--}}
+                            <div class="pull-right box-tools">
+                                <button type="button" class="btn btn-outline-light btn-sm" data-widget="collapse" data-toggle="tooltip">
+                                    <i class="fa fa-minus"></i></button>
                             </div>
                         </div>
                         <!-- /.box-header -->

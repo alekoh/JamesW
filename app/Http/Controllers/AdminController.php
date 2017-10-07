@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use DB;
 use App\Demand;
 use App\User;
+use Hesto\MultiAuth\Traits\LogsoutGuard;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Document;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class AdminController extends BaseController
@@ -153,5 +155,11 @@ class AdminController extends BaseController
 
         return $countAccepted;
     }
+    /*find the current logged in admin*/
+    public static function getNameAdmin(){
 
+        return Auth::guard('admin')->user()->name;
+
+
+    }
 }

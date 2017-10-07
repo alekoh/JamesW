@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Demand;
 use App\Document;
 use App\Admin;
@@ -13,6 +14,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Comment\Doc;
+use Intervention\Image\Facades\Image;
 
 
 class Controller extends BaseController
@@ -25,28 +27,59 @@ class Controller extends BaseController
     }
 
     public function index() {
+
+        $id = Auth::user()->id;
+        $user = Auth::user();
         $documents = Document::all();
         $demands = Demand::all();
+
 
         $documents_approved = [];
         $documents_declined = [];
         $documents_review = [];
 
         foreach ($documents as $document) {
-            if ($document->status == 1) {
-                array_push($documents_approved, $document);
-            } else if ($document->status == -1) {
-                array_push($documents_declined, $document);
-            } else if ($document->status == 0) {
-                array_push($documents_review, $document);
+            if($document->company_id == $id){
+                if ($document->status == 1) {
+                    array_push($documents_approved, $document);
+                } else if ($document->status == -1) {
+                    array_push($documents_declined, $document);
+                } else if ($document->status == 0) {
+                    array_push($documents_review, $document);
+                }
             }
         }
 
-        return view('company.home', ['documents_approved' => $documents_approved, 'documents_declined' => $documents_declined, 'documents_review' => $documents_review, 'demands' => $demands,'documents'=>$documents]);
+        return view('company.home', ['user'=>$user,'documents_approved' => $documents_approved, 'documents_declined' => $documents_declined, 'documents_review' => $documents_review, 'demands' => $demands,'documents'=>$documents]);
     }
 
-    public function createDocument(){
-        return view('company.documents.create');
+    public function getInfo(){
+
+        $user = Auth::user();
+        /*$id = Auth::user()->id;*/
+        $name = Auth::user()->name;
+        $email = Auth::user()->email;
+
+        return view('company.profile',compact('user','name','email'));
+
+    }
+
+    public function uploadPhoto(Request $request){
+
+        if($request->hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time().'.'.$avatar->getClientOriginalExtension();
+            $path = 'uploads/avatars/'.$filename;
+            Image::make($avatar->getRealPath())->resize(300,300)->save($path);
+            if (!file_exists($path)) {
+                mkdir($path, 666, true);
+            }
+            $user = Auth::user();
+            $user->avatar = $filename;
+            $user->save();
+        }
+
+        return view('company.profile', compact('user'));
     }
 
     public function storeDocument(Request $request){
@@ -76,14 +109,13 @@ class Controller extends BaseController
     /*list all the documents from the given company*/
     public function listMyDocuments(){
 
-
-        /* $my_id = User::find($id);*/
         $allDocuments = Document::all();
-
-        //todo: Sort the documents according to their status
         $myDocuments = [];
+
+        $id = Auth::user()->id;
+
         foreach ($allDocuments as $document){
-            if($document->company_id == 1 ){
+            if($document->company_id == $id ){
                 array_push($myDocuments,$document);
             }
         }
@@ -93,13 +125,14 @@ class Controller extends BaseController
     /*list all the requests for the given company*/
     public function listMyRequests(){
         $allRequests = Demand::all();
+        $id = Auth::user()->id;
         $myRequests = [];
         foreach ($allRequests as $myRequest){
-            if($myRequest->company_id == 1){
+            if($myRequest->company_id == $id){
                 array_push($myRequests,$myRequest);
             }
         }
-        return view('company.company-requests',['myRequests'=>$myRequests]);
+        return view('company.requests.company-requests',['myRequests'=>$myRequests]);
     }
     /*get the Name from the company as a foreign key*/
     public static function getAdminName($admin_id){
@@ -107,4 +140,44 @@ class Controller extends BaseController
         return $admin->name;
     }
 
+    /*document preview*/
+    /*public function documentPreview(Request $request,$id){
+       $document = Document::find($id);
+       $documentName = $request->file('blob_value');
+       /*$documentValue = Document::find($id)->get('value');*/
+
+       /* return view('company.documentPreview',['documentName'=>$documentName]);*/
+    /*}*/
+
+    public function getPending(){
+
+        $id = Auth::user()->id;
+
+        $pendingDocuments = \DB::table('documents')->where('company_id','=',$id)->where('status','=',0)->get();
+
+        return view('company.documents.pendingDocuments',['pendingDocuments'=>$pendingDocuments]);
+    }
+    public function getDenied(){
+
+        $id = Auth::user()->id;
+
+        $deniedDocuments = \DB::table('documents')->where('company_id','=',$id)->where('status','=',-1)->get();
+
+        return view('company.documents.deniedDocuments',['deniedDocuments'=>$deniedDocuments]);
+    }
+    public function getAccepted(){
+
+        $id = Auth::user()->id;
+
+        $acceptedDocuments = \DB::table('documents')->where('company_id','=',$id)->where('status','=',1)->get();
+
+        return view('company.documents.acceptedDocuments',['acceptedDocuments'=>$acceptedDocuments]);
+    }
+
+    /*return company name*/
+    public static function getNameCompany(){
+
+        return Auth::user()->name;
+
+    }
 }

@@ -7,17 +7,24 @@
                 <div class="box box-default">
                     <div class="box-header with-border">
                         <div class="col-md-6">
-                            <h3 class="box-title">Document content</h3>
+                            <h3 class="box-title"></h3>
                         </div>
                         <div class="col-md-3 col-md-offset-3">
+                            {{--@if($document->status == 1)
                             <p><strong>Status&nbsp</strong><span class="label label-warning">Pending</span></p>
+                                @elseif($document->status ==-1)
+                                <p><strong>Status&nbsp</strong><span class="label label-danger">Denied</span></p>
+                                @elseif($document->status == 0)
+                                <p><strong>Status&nbsp</strong><span class="label label-success">Accepted</span></p>
+                            @endif--}}
+                            {{--<p><strong>Status&nbsp</strong><span class="label label-warning">Pending</span></p>--}}
                         </div>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
 
+                       {{-- <center><img src="{{$document->blob_value}}"></center>--}}
                         <center><img src="{{asset('assets/img/defenders.jpg')}}"></center>
-
                         <hr>
 
                         <strong><i class="fa fa-file-text-o margin-r-5"></i> Description</strong>

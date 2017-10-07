@@ -23,6 +23,10 @@
     -->
     <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/dist/css/skins/skin-blue.min.css')}}">
 
+    {{--custom css--}}
+
+    <link rel="stylesheet" href="{{asset('css/custom.css')}}">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -188,17 +192,17 @@ desired effect
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="{{asset('bower_components/AdminLTE/dist/img/avatar2.png')}}" class="user-image" alt="User Image">
+                            <img src="{{asset("/uploads/avatars/".Auth::user()->avatar)}}" class="user-image" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">User</span>
+                            <span class="hidden-xs">{{ \App\Http\Controllers\Controller::getNameCompany() }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="{{asset('bower_components/AdminLTE/dist/img/avatar2.png')}}" class="img-circle" alt="User Image">
+                                <img src="{{asset("/uploads/avatars/".Auth::user()->avatar)}}" class="img-circle" alt="User Image">
 
                                 <p>
-                                    User
+                                    {{ \App\Http\Controllers\Controller::getNameCompany() }}
                                     <small>Member since Sep. 2017</small>
                                 </p>
                             </li>
@@ -223,7 +227,7 @@ desired effect
                                     <a href="{{route('home')}}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{url('company/logout')}}" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -245,10 +249,10 @@ desired effect
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{asset('bower_components/AdminLTE/dist/img/avatar2.png')}}" class="img-circle" alt="User Image">
+                    <img src="{{asset("/uploads/avatars/".Auth::user()->avatar)}}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>User</p>
+                    <p>{{ \App\Http\Controllers\Controller::getNameCompany() }}</p>
                     <!-- Status -->
                     {{--<a href="#"><i class="fa fa-circle text-success"></i> Online</a>--}}
                 </div>
@@ -270,10 +274,10 @@ desired effect
             <ul class="sidebar-menu">
                 <li class="header">Navigation</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="{{route('home')}}"><i class="fa fa-link"></i> <span>Profile</span></a></li>
-                <li><a href="{{route('myRequests')}}"><i class="fa fa-link"></i> <span>Requests</span></a></li>
+                <li class="active"><a href="{{route('profile')}}"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                <li><a href="{{route('myRequests')}}"><i class="fa fa-tasks"></i> <span>Requests</span></a></li>
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>My Documents</span>
+                    <a href="#"><i class="fa fa-file"></i> <span>My Documents</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

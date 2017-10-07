@@ -31,6 +31,7 @@ Route::group(['prefix' => 'company'], function (){
 
     Route::get('/login', 'Auth\LoginController@showLoginForm');
     Route::post('/login', 'Auth\LoginController@login');
+    Route::get('/logout', 'Auth\LoginController@logout');
 
     Route::get('/register', 'Auth\RegisterController@showForm');
     Route::post('/register', 'Auth\RegisterController@create');
@@ -43,9 +44,17 @@ Route::group(['prefix' => 'company'], function (){
 
     Route::get('/myRequests','Controller@listMyRequests')->name('myRequests');
 
-    Route::get('/documentPreview',function (){
-        return view('company/documentPreview');
+    Route::get('documents/pendingDocuments','Controller@getPending')->name('pendingDocuments');
+    Route::get('documents/deniedDocuments','Controller@getDenied')->name('deniedDocuments');
+
+    /*Route::get('/documentPreview/{id}','Controller@documentPreview')->name('documentPreview');*/
+
+    Route::get('documents/documentPreview',function (){
+        return view('company.documents.documentPreview');
     })->name('documentPreview');
+
+    Route::get('profile', 'Controller@getInfo')->name('profile');
+    Route::post('profile', 'Controller@uploadPhoto');
 });
 
 Route::group(['prefix' => 'admin'], function () {
@@ -54,7 +63,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/login', 'AdminAuth\LoginController@showLoginForm');
     Route::post('/login', 'AdminAuth\LoginController@login');
-    Route::post('/logout', 'AdminAuth\LoginController@logout');
+    Route::get('/logout', 'AdminAuth\LoginController@logout')->name('logout');
 
     Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm');
     Route::post('/register', 'AdminAuth\RegisterController@register');

@@ -1,0 +1,73 @@
+#portfolio {
+    padding: 80px 0;
+}
+
+.portfolio-item {
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 260px;
+    width: 100%;
+    display: table;
+    overflow: hidden;
+    margin-bottom: 30px;
+    text-decoration: none;
+}
+
+.portfolio-item .details {
+    height: 260px;
+    background: #fff;
+    display: table-cell;
+    vertical-align: middle;
+    opacity: 0;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.portfolio-item .details h4 {
+    font-size: 16px;
+    transition: opacity 0.3s, -webkit-transform 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s, -webkit-transform 0.3s;
+    -webkit-transform: translate3d(0, -15px, 0);
+    transform: translate3d(0, -15px, 0);
+    font-weight: 700;
+    color: #333333;
+}
+
+.portfolio-item .details span {
+    display: block;
+    color: #666666;
+    font-size: 13px;
+    transition: opacity 0.3s, -webkit-transform 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s, -webkit-transform 0.3s;
+    -webkit-transform: translate3d(0, 15px, 0);
+    transform: translate3d(0, 15px, 0);
+    text-decoration: none;
+}
+
+.portfolio-item:hover .details {
+    opacity: 0.8;
+}
+
+.portfolio-item:hover .details h4 {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    text-decoration: none;
+}
+
+.portfolio-item:hover .details span {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.fontStyle{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: larger;
+    padding-bottom: 10px;
+}
+.PaddingTop{
+   padding-top: 20px;
+}

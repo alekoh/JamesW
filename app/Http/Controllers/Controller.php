@@ -14,6 +14,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Comment\Doc;
+use Intervention\Image\Facades\Image;
 
 
 class Controller extends BaseController
@@ -28,6 +29,7 @@ class Controller extends BaseController
     public function index() {
 
         $id = Auth::user()->id;
+        $user = Auth::user();
         $documents = Document::all();
         $demands = Demand::all();
 
@@ -48,37 +50,36 @@ class Controller extends BaseController
             }
         }
 
-        return view('company.home', ['documents_approved' => $documents_approved, 'documents_declined' => $documents_declined, 'documents_review' => $documents_review, 'demands' => $demands,'documents'=>$documents]);
+        return view('company.home', ['user'=>$user,'documents_approved' => $documents_approved, 'documents_declined' => $documents_declined, 'documents_review' => $documents_review, 'demands' => $demands,'documents'=>$documents]);
     }
 
     public function getInfo(){
 
-        $id = Auth::user()->id;
+        $user = Auth::user();
+        /*$id = Auth::user()->id;*/
         $name = Auth::user()->name;
         $email = Auth::user()->email;
 
-        return view('company.profile',compact('id','name','email'));
+        return view('company.profile',compact('user','name','email'));
 
     }
 
-    public function uploadPhoto(Request $request, $id){
+    public function uploadPhoto(Request $request){
 
-        $id = Auth::user()->id;
-
-        $file = $request->file('photo');
-        if ($request->file('photo')->isValid()) {
-
-            // get the upload file path
-            $realpath = $file->getRealPath();
-
-            // ... then load the file in to a var and assign to the db array
-
-        } else {
-            return view('profile')->with('There has been an error');
+        if($request->hasFile('avatar')){
+            $avatar = $request->file('avatar');
+            $filename = time().'.'.$avatar->getClientOriginalExtension();
+            $path = 'uploads/avatars/'.$filename;
+            Image::make($avatar->getRealPath())->resize(300,300)->save($path);
+            if (!file_exists($path)) {
+                mkdir($path, 666, true);
+            }
+            $user = Auth::user();
+            $user->avatar = $filename;
+            $user->save();
         }
-    }
-    public function createDocument(){
-        return view('company.documents.create');
+
+        return view('company.profile', compact('user'));
     }
 
     public function storeDocument(Request $request){

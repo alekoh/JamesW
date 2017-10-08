@@ -63,7 +63,9 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/login', 'AdminAuth\LoginController@showLoginForm');
     Route::post('/login', 'AdminAuth\LoginController@login');
-    Route::get('/logout', 'AdminAuth\LoginController@logout')->name('logout');
+    Route::get('/logout', 'AdminAuth\LoginController@logout');
+
+    Route::get('/loggedIn', 'AdminController@getAdmin');
 
     Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm');
     Route::post('/register', 'AdminAuth\RegisterController@register');
@@ -75,11 +77,9 @@ Route::group(['prefix' => 'admin'], function () {
 
     /*add request*/
     Route::get('requests/createRequest','AdminController@create')->name('createRequest');
-
     Route::post('requests/createRequest','AdminController@store');
 
-    Route::get('requests/editRequest/{id}','AdminController@edit');
-
+    Route::get('requests/editRequest/{id}','AdminController@edit')->name('editRequest');
     Route::post('requests/editRequest/{id}','AdminController@update');
 
     Route::get('requests/deleteRequest/{id}','AdminController@destroy')->name('deleteRequest');
@@ -92,6 +92,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('companies/listCompanies','AdminController@listCompanies')->name('listCompanies');
     Route::get('documents/listDocuments','AdminController@listDocuments')->name('listDocuments');
     Route::get('requests/listRequests','AdminController@listDemands')->name('listRequests');
+
     Route::get('documents/pending','AdminController@getPending')->name('pending');
     Route::get('documents/denied','AdminController@getDenied')->name('denied');
 

@@ -28,8 +28,8 @@ class Controller extends BaseController
 
     public function index() {
 
-        $id = Auth::user()->id;
         $user = Auth::user();
+        $id = Auth::user()->id;
         $documents = Document::all();
         $demands = Demand::all();
 
@@ -70,10 +70,12 @@ class Controller extends BaseController
             $avatar = $request->file('avatar');
             $filename = time().'.'.$avatar->getClientOriginalExtension();
             $path = 'uploads/avatars/'.$filename;
+
             Image::make($avatar->getRealPath())->resize(300,300)->save($path);
             if (!file_exists($path)) {
                 mkdir($path, 666, true);
             }
+
             $user = Auth::user();
             $user->avatar = $filename;
             $user->save();

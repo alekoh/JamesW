@@ -7,6 +7,11 @@
     <title>AdminLTE 2 | Starter</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+
+    <!-- jQuery 2.2.3 -->
+    <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+
     <!-- Bootstrap 3.3.6 -->
     {{--<link rel="stylesheet" href="{{asset('assets/bootstrap/bootstrap.min.css')}}">--}}
     <link rel="stylesheet" href="{{asset('bower_components/AdminLTE/bootstrap/css/bootstrap.min.css')}}">
@@ -209,7 +214,7 @@ desired effect
                                     <a href="{{route('dashboard')}}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{route('logout')}}" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{url('admin/logout')}}" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -400,8 +405,6 @@ desired effect
 
 <!-- REQUIRED JS SCRIPTS -->
 
-<!-- jQuery 2.2.3 -->
-<script src="{{asset('bower_components/bower_components/jquery/dist/jquery.min.js')}}"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="{{asset('bower_components/AdminLTE/bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('bower_components/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>

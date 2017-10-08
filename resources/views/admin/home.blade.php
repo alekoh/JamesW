@@ -78,11 +78,11 @@
                                 <td>{{$document->id}}</td>
                                 <td>{{\App\Http\Controllers\AdminController::getName($document->company_id)}}</td>
                                 <td>{{$document->created_at}}</td>
-                                @if ($document->status === 0)
+                                @if ($document->status == 0)
                                     <td><span class="label label-warning">Pending</span></td>
-                                @elseif ($document->status === 1)
+                                @elseif ($document->status == 1)
                                     <td><span class="label label-success">Accepted</span></td>
-                                @elseif($document->status === -1)
+                                @elseif($document->status == -1)
                                     <td><span class="label label-danger">Denied</span></td>
                                 @endif
                                 <td>

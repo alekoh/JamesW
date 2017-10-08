@@ -27,6 +27,8 @@ class AdminController extends BaseController
         return view('admin.home',compact('documents','companies','demands'));
 
     }
+
+    // List every user, document and request
     public function listDocuments(){
         $documents = Document::all();
         return view('admin.documents.listDocuments',['documents'=>$documents]);
@@ -39,6 +41,8 @@ class AdminController extends BaseController
         $demands = Demand::all();
         return view('admin.requests.listRequests',['demands'=>$demands]);
     }
+
+    // List documents with their status
     public function getPending(){
         $pendingDocuments = \DB::table('documents')->where('status','=',0)->get();
 
@@ -57,7 +61,7 @@ class AdminController extends BaseController
 
     /*get the Name from the company as a foreign key*/
     public static function getName($company_id){
-        $company= User::find($company_id);
+        $company = User::find($company_id);
         return $company->name;
     }
 
@@ -66,7 +70,6 @@ class AdminController extends BaseController
         $companies = User::all();
         return view('admin.requests.requestForm')->with('companies',$companies);
     }
-
     public function store(Request $request){
         $newDemand =  new Demand();
         $newDemand->company_id = $request->input('company_id');
@@ -77,24 +80,24 @@ class AdminController extends BaseController
         $newDemand->save();
         return redirect('admin/requests/listRequests');
     }
+
     public function edit($id){
         $demand = Demand::find($id);
         return view('requestForm')->with('demand',$demand);
     }
-
     public function update(Request $request, $id){
         Demand::find($id)->update($request->all());
         return redirect('home');
     }
+
     public function destroy($id){
         Demand::find($id)->delete();
 
         return redirect('admin/requests/listRequests');
     }
-
+    /* end of Demands CRUD operations */
 
     /*Company CRUD operations*/
-
     public function createCompany(){
         return view('admin.companies.addCompany');
     }
@@ -113,6 +116,7 @@ class AdminController extends BaseController
             'password' => bcrypt($request->input('company_password')),
         ]);
 
+        // todo: check whether the user is successfully created
         Mail::send('email', ['email' => $newCompanyEmail], function ($m) use ($newCompanyEmail) {
             $m->from('alek.oh@hotmail.com', 'Contentifly');
 
@@ -121,19 +125,21 @@ class AdminController extends BaseController
 
         return redirect('admin/companies/listCompanies');
     }
-    /*public function editCompany($id){
+
+    public function editCompany($id){
         $company = User::find($id);
         return view('/addCompany')->with('company',$company);
     }
-
-    public function update(Request $request, $id){
+    public function updateCompany(Request $request, $id){
         User::find($id)->update($request->all());
         return redirect('home');
     }
-    public function destroy($id){
+
+    public function destroyCompany($id){
         User::find($id)->delete();
         return redirect('home');
-    }*/
+    }
+    /* end of Company CRUD operations */
 
     /*count the pending documents*/
     public static function getSumPending() {
@@ -159,7 +165,6 @@ class AdminController extends BaseController
     public static function getNameAdmin(){
 
         return Auth::guard('admin')->user()->name;
-
 
     }
 }

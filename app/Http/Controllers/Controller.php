@@ -13,6 +13,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use PhpParser\Comment\Doc;
 use Intervention\Image\Facades\Image;
 
@@ -84,30 +85,36 @@ class Controller extends BaseController
         return view('company.profile', compact('user'));
     }
 
+    public function createDocument() {
+        return view('company.documents.create');
+    }
     public function storeDocument(Request $request){
 
         $company_id = Auth::user()->id;
+        $company_name = Auth::user()->name;
 
-        $file = $request->file('blob_value');
-        $content = $file->openFile()->fread($file->getSize());
+        $file_name = $request->input('document_name');
+        $file = $request->file('document_value');
+        $ext = $file->extension();
 
-//        $request->validate([
-//            'document_name' => 'required',
-//            'document_value' => 'required',
-//            'document_description' => 'min:15'
-//        ]);
+        $disk = Storage::disk('s3');
+        $file_target = 'videos/' . $company_name . '/' . $file_name . $ext;
+
+        // Store the file to s3 and return the file path
+        $file_path = $disk->put($file_target, fopen($file, 'r+'));
+
 
         $newDocument = new Document();
+        $newDocument->name = $file_name;
         $newDocument->company_id = $company_id;
-        $newDocument->name = $request->input('document_name');
-        $newDocument->value = $request->input('document_value');
-        $newDocument->blob_value = $content;
-        $newDocument->size = $file->getSize();
+        $newDocument->admin_id = 7;
+        $newDocument->value = $file_path;
 
         $newDocument->save();
 
         return redirect('company/home');
     }
+
     /*list all the documents from the given company*/
     public function listMyDocuments(){
 
@@ -124,6 +131,7 @@ class Controller extends BaseController
 
         return view('company.documents.submits',['myDocuments'=>$allDocuments]);
     }
+
     /*list all the requests for the given company*/
     public function listMyRequests(){
         $allRequests = Demand::all();
@@ -136,6 +144,7 @@ class Controller extends BaseController
         }
         return view('company.requests.company-requests',['myRequests'=>$myRequests]);
     }
+
     /*get the Name from the company as a foreign key*/
     public static function getAdminName($admin_id){
         $admin= Admin::find($admin_id);
@@ -143,13 +152,11 @@ class Controller extends BaseController
     }
 
     /*document preview*/
-    /*public function documentPreview(Request $request,$id){
+    public function documentPreview(Request $request,$id){
        $document = Document::find($id);
-       $documentName = $request->file('blob_value');
-       /*$documentValue = Document::find($id)->get('value');*/
 
-       /* return view('company.documentPreview',['documentName'=>$documentName]);*/
-    /*}*/
+       return view('company.documents.documentPreview',['document'=>$document]);
+    }
 
     public function getPending(){
 

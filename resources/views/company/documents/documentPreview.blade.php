@@ -22,9 +22,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-
-                       {{-- <center><img src="{{$document->blob_value}}"></center>--}}
-                        <center><img src="{{asset('assets/img/defenders.jpg')}}"></center>
+                        <img src="{{ Storage::disk('s3')->url($document->value) }}">
                         <hr>
 
                         <strong><i class="fa fa-file-text-o margin-r-5"></i> Description</strong>

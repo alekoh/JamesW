@@ -20,8 +20,8 @@ class PhotoCompany extends Migration
             $table->unsignedInteger('company_id');
             $table->foreign('company_id')->references('id')->on('users');
 
-            $table->string('file_name');
-            $table->string('path_to_file');
+            $table->string('avatar')->default('user_default.png');
+            $table->string('image_path')->default('uploads/avatars/user_default.png');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });

@@ -13,6 +13,8 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use phpDocumentor\Reflection\File;
 use PhpParser\Comment\Doc;
 use Intervention\Image\Facades\Image;
 
@@ -56,11 +58,8 @@ class Controller extends BaseController
     public function getInfo(){
 
         $user = Auth::user();
-        /*$id = Auth::user()->id;*/
-        $name = Auth::user()->name;
-        $email = Auth::user()->email;
-
-        return view('company.profile',compact('user','name','email'));
+//
+        return view('company.profile',['user'=>$user]);
 
     }
 
@@ -71,7 +70,7 @@ class Controller extends BaseController
             $filename = time().'.'.$avatar->getClientOriginalExtension();
             $path = 'uploads/avatars/'.$filename;
 
-            Image::make($avatar->getRealPath())->resize(300,300)->save($path);
+            Image::make($avatar->getRealPath())->resize(250,300)->save($path);
             if (!file_exists($path)) {
                 mkdir($path, 666, true);
             }
@@ -81,9 +80,31 @@ class Controller extends BaseController
             $user->save();
         }
 
-        return view('company.profile', compact('user'));
+        return redirect('company/profile');
     }
 
+    /*public function deletePhoto()
+    {
+        $user = Auth::user();
+        $id = Auth::user()->id;
+        $image_path = Auth::user()->image_path;
+        /*$ = app_path("uploads/avatars/.{$image->avatar}");*/
+
+        /*if (\File::exists($image_path)) {
+            \File::delete($image_path);
+            unlink($image_path);
+
+        }else{
+            dd('File does not exists.');
+        }
+
+        $user->save();
+        return redirect('company/profile');*/
+    /*}*/
+
+    public function createDocument(){
+        return view('company.documents.create');
+    }
     public function storeDocument(Request $request){
 
         $company_id = Auth::user()->id;

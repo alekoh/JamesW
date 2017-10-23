@@ -421,5 +421,14 @@ desired effect
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
      fixed layout. -->
+<script>
+
+    $('#delete_image').on({
+        'click': function(){
+            $('#avatar_image').css('background-image', 'url(uploads/avatars/user-default.png)');
+        }
+    });
+
+</script>
 </body>
 </html>

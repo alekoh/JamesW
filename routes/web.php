@@ -55,6 +55,7 @@ Route::group(['prefix' => 'company'], function (){
 
     Route::get('profile', 'Controller@getInfo')->name('profile');
     Route::post('profile', 'Controller@uploadPhoto');
+    Route::get('profile/deletePhoto','Controller@deletePhoto')->name('deletePhoto');
 });
 
 Route::group(['prefix' => 'admin'], function () {

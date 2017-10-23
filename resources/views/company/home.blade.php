@@ -93,7 +93,7 @@
                                             <td><span class="label label-danger">Denied</span></td>
                                         @endif
                                         <td>
-                                            <a href="{{route('documentPreview')}}" type="button" class="btn btn-primary btn-sm">Preview</a>
+                                            <a href="{{route('documentPreview', $document->id)}}" type="button" class="btn btn-primary btn-sm">Preview</a>
                                         </td>
                                     </tr>
                                 @endforeach

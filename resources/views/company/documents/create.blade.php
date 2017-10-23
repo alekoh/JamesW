@@ -20,7 +20,7 @@
                         </div>
                         <div class="form-group">
                             <label for="document_value">Document</label>
-                            <input type="file" id="document_value" name="blob_value">
+                            <input type="file" id="document_value" name="document_value">
 
                         </div>
                         <div class="form-group">

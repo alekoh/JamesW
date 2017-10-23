@@ -34,7 +34,7 @@
                                     <td>{{$pendingDoc->created_at}}</td>
                                     <td><span class="label label-warning">Pending</span></td>
                                     <td>
-                                        <a href="{{route('documentPreview')}}" type="button" class="btn btn-primary btn-sm">Preview</a>
+                                        <a href="{{route('documentPreview', $pendingDoc->id)}}" type="button" class="btn btn-primary btn-sm">Preview</a>
                                     </td>
                                 </tr>
                             @endforeach

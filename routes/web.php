@@ -47,11 +47,11 @@ Route::group(['prefix' => 'company'], function (){
     Route::get('documents/pendingDocuments','Controller@getPending')->name('pendingDocuments');
     Route::get('documents/deniedDocuments','Controller@getDenied')->name('deniedDocuments');
 
-    /*Route::get('/documentPreview/{id}','Controller@documentPreview')->name('documentPreview');*/
+    Route::get('/documentPreview/{id}','Controller@documentPreview')->name('documentPreview');
 
-    Route::get('documents/documentPreview',function (){
-        return view('company.documents.documentPreview');
-    })->name('documentPreview');
+//    Route::get('documents/documentPreview',function (){
+//        return view('company.documents.documentPreview');
+//    })->name('documentPreview');
 
     Route::get('profile', 'Controller@getInfo')->name('profile');
     Route::post('profile', 'Controller@uploadPhoto');
